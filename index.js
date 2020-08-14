@@ -1,7 +1,11 @@
     const {Client}= require("discord.js");
-    const client =new Client({
-        disableEveryone: true
-    });
+    const client =new Client();
+       // disableEveryone: true
+    //    client.once('ready',()=>{
+    //        console.log('Reaady');
+    //    });
+       client.login('NzQyOTY4NDUzMzQxNjQyNzYy.XzN1Sg.NLmMZlYiHdAsjscun62xWhL2_IQ');
+
     require('dotenv').config();
 var request = require('request');
 var herodataJSON;
@@ -15,40 +19,43 @@ var database=[
     ['stormblessed','368441758'],
     ['aw-strakh','352680591']
 ];
-function appendURL(url1,id,url2);
-return url.concat(id,url2);
+// function appendURL(url1, id, url2) {
+//     return url1.concat(id, url2);
+// }
 
-
+// Help command
 function helpcommand(input, message) {
     if (message.content.startsWith('!help')) {
         message.channel.send('```Welcome to the dotabot created by Matthew Zegar. This bot gathers API data from "https://docs.opendota.com".\n \nCommands:\n!help - shows all commands \n!info <id> - displays info about the dota player \n!database - shows which names are present within the database \n!lastmatch <id> - displays info about the last match the user played \n!matches <id> - displays info about all the matches the user has played\n!match <matchid> - shows information about the match \n!dotabuff - links to dotabuff ```');
     }
 }
-function databasecommand(input,message)
-{
-    if(message.content.startsWith('!database'))
-    {
-        for(i=0;i<database.length;i++)
-        message.channel.send(database[i][0]);
-    }
-}
-function dotabuff(input,message)
-{
-    if(message.content.startsWith('!dotabuff'))
-    {
-        message.channel.send('https://www.dotabuff.com/');
-    }
-}
-function personnamevalid(num,data)
-{
-   if(typeof data.players[num].personname=='undefined')
-   {
-       return 'Anonymus';
-   }
-   else
-   return dota.players[num].personname;
+
+// Lists all of the users within the database
+function databasecommand(input, message) {
+    if (message.content.startsWith('!database')) {
+        for (i = 0; i < database.length; i++) {
+            message.channel.send(database[i][0]);
+        }
+    }  
 }
 
+// Links dotabuff
+function dotabuff(input, message) {
+    if (message.content.startsWith('!dotabuff')) {
+        message.channel.send('https://www.dotabuff.com/');
+    }     
+}
+
+// Not all users in the API have a name, anonymous will be returned with the DOTA API cannot find a name
+function personnamevalid(num, data) {
+        if (typeof data.players[num].personaname == 'undefined') {
+            return 'Anonymous';
+        } else {
+            return data.players[num].personaname;
+        } 
+}
+
+// !info command
 function infocommand(input, message) {
     if (message.content.startsWith('!info ')) {
         let id = lookupid(input.substring(6, (input.length)));
@@ -65,6 +72,8 @@ function infocommand(input, message) {
         }); 
     }
 }
+
+// !lastmatch command
 function lastmatchcommand(input, message) {
     if (message.content.startsWith('!lastmatch ')) {
         let id = lookupid(input.substring(11, (input.length)));
@@ -91,6 +100,8 @@ function lastmatchcommand(input, message) {
 
     }
 }
+
+// !matches command
 function matchescommand(input, message) {
     if (message.content.startsWith('!matches ')) {
         let id = lookupid(input.substring(9, (input.length)));
@@ -107,22 +118,8 @@ function matchescommand(input, message) {
         }); 
     }
 }
-function matchescommand(input, message) {
-    if (message.content.startsWith('!matches ')) {
-        let id = lookupid(input.substring(9, (input.length)));
-        let url = "https://api.opendota.com/api/players/";
-        let finalurl = url.concat(id, '/counts');   
 
-        request(finalurl, function (error, response, body) {
-            let data = JSON.parse(body);
-            if (typeof data.leaver_status[0] == 'undefined') {
-                message.channel.send('Error, invalid ID');
-            } else {
-                message.channel.send('```Total matches completed: ' + data.leaver_status[0].games + '\nWins: ' + data.leaver_status[0].win + '\nLosses: ' + (data.leaver_status[0].games - data.leaver_status[0].win) + '\nWon %: ' + Math.round((data.leaver_status[0].win / data.leaver_status[0].games)*100) +'```');
-            }
-        }); 
-    }
-}
+// !match command
 function matchcommand(input, message, herodataJSON) {
     if (message.content.startsWith('!match ')) {
         let id = lookupid(input.substring(7, (input.length)));
@@ -141,6 +138,8 @@ function matchcommand(input, message, herodataJSON) {
         }); 
     }   
 }
+
+// !word command
 function wordcommand(input, message) {
     if (message.content.startsWith('!words ')) {
         var res = input.split(" ");
@@ -379,9 +378,7 @@ client.on("message", async message => {
     prizecommand(input, message);
 });
 
-
+console.log('done');
 
 // Heroku login
-client.login(process.env.BOT_TOKEN);
-
-
+//client.login('IUX4QlDk__sAnn0QY5nquVg54G_31Gwb');

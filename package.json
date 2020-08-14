@@ -9,6 +9,18 @@
   "author": "AW-STRAKH",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0"
-  }
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AW-STRAKH/DOTA-STATEEE.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/AW-STRAKH/DOTA-STATEEE/issues"
+  },
+  "homepage": "https://github.com/AW-STRAKH/DOTA-STATEEE#readme"
 }
