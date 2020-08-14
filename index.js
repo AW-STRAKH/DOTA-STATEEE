@@ -4,7 +4,7 @@
     //    client.once('ready',()=>{
     //        console.log('Reaady');
     //    });
-       client.login('NzQyOTY4NDUzMzQxNjQyNzYy.XzN1Sg.NLmMZlYiHdAsjscun62xWhL2_IQ');
+       client.login('process.env.BOT_TOKEN');
 
     require('dotenv').config();
 var request = require('request');
