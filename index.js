@@ -4,7 +4,7 @@
     //    client.once('ready',()=>{
     //        console.log('Reaady');
     //    });
-       client.login('process.env.BOT_TOKEN');
+       client.login(process.env.BOT_TOKEN);
 
     require('dotenv').config();
 var request = require('request');
